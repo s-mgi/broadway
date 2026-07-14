@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broadway Glen — A Prestigious Collection of Townhomes in Orangeville</title>
+<meta name="description" content="Broadway Glen is a boutique collection of freehold townhomes by Maramel Homes in the heart of Orangeville, ON. Register for priority access, floorplans and pricing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#0e251e;
+  --forest2:#16342a;
+  --sage:#6f7d52;
+  --sage-light:#9aa878;
+  --gold:#c19a5b;
+  --gold-light:#d6b57e;
+  --cream:#f5f1e8;
+  --paper:#ecebe3;
+  --text:#3c4038;
+  --white:#ffffff;
+  --radius:30px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:var(--white);line-height:1.7;overflow-x:hidden;font-weight:400}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--forest);line-height:1.1}
+.display{font-style:italic;font-weight:600}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500}
+
+/* Buttons */
+.btn{display:inline-block;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:15px 34px;border-radius:40px;transition:.25s;text-align:center}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.75);color:#fff}
+.btn-outline:hover{background:#fff;color:var(--forest)}
+.btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold-light));color:var(--forest)}
+.btn-gold:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.btn-sage{background:var(--sage);color:#fff}
+.btn-sage:hover{background:var(--sage-light);transform:translateY(-2px)}
+.btn-forest{background:var(--forest);color:#fff}
+.btn-forest:hover{background:var(--forest2)}
+
+/* Top bar */
+.topbar{background:var(--forest2);color:var(--cream)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 24px;flex-wrap:wrap}
+.topbar-info{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-light)}
+.topbar-info strong{color:var(--gold-light);font-weight:500}
+.topbar-cta{display:flex;gap:12px;flex-wrap:wrap}
+.topbar-cta .btn{padding:10px 22px}
+
+/* Nav */
+.nav{background:var(--forest);position:sticky;top:0;z-index:60;box-shadow:0 2px 24px rgba(0,0,0,.25)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:14px;color:#fff}
+.brand img{height:44px;width:auto}
+.brand .txt{display:flex;flex-direction:column;line-height:1.1}
+.brand .name{font-family:'Jost',sans-serif;font-size:19px;letter-spacing:.3em;font-weight:400;color:var(--cream)}
+.brand .sub{font-size:8px;letter-spacing:.42em;color:var(--gold);margin-top:2px}
+.menu{display:flex;align-items:center;gap:32px;list-style:none}
+.menu a{color:var(--cream);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;transition:.2s;cursor:pointer}
+.menu a:hover{color:var(--gold-light)}
+.menu .caret{font-size:8px;margin-left:5px;opacity:.7}
+.drop{position:relative}
+.drop-panel{position:absolute;top:160%;left:50%;transform:translateX(-50%) translateY(8px);background:#fff;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.2);padding:10px 0;min-width:220px;opacity:0;visibility:hidden;transition:.22s;z-index:70}
+.drop:hover .drop-panel{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.drop-panel a{display:block;color:var(--forest);padding:11px 24px;letter-spacing:.1em}
+.drop-panel a:hover{background:var(--paper);color:var(--gold)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:var(--cream);transition:.3s}
+
+/* Hero */
+.hero{position:relative;background:var(--forest);height:min(74vh,600px);overflow:hidden}
+.hero .hero-bg{position:absolute;top:-20%;left:0;width:100%;height:140%;object-fit:cover;object-position:center 42%;display:block;will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,37,30,.4),rgba(14,37,30,.2) 45%,rgba(14,37,30,.55));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px}
+.hero-logo{width:clamp(110px,13vw,170px);height:auto;margin-bottom:30px;filter:drop-shadow(0 6px 26px rgba(0,0,0,.45))}
+.hero-overlay .btn{margin-top:0}
+.statusbar{background:linear-gradient(90deg,var(--gold),var(--gold-light));text-align:center;color:var(--forest);font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;padding:15px}
+
+/* Collection */
+.collection{background:var(--forest);color:var(--cream);text-align:center;padding:76px 24px 118px;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);position:relative;z-index:2;margin-bottom:-50px}
+.collection .eyebrow{color:var(--gold-light)}
+.collection h2{color:#fff;font-size:clamp(34px,5vw,54px);margin:14px 0 18px}
+.collection p{max-width:660px;margin:0 auto 34px;opacity:.9;font-size:16px}
+.collection .row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.collection .btn{min-width:220px}
+
+/* Nature (circle overlap) */
+.nature{position:relative;text-align:center}
+.strip{height:min(70vh,620px);width:100%;object-fit:cover;object-position:center 60%}
+.circle-photo{width:200px;height:200px;border-radius:50%;object-fit:cover;border:5px solid var(--gold);margin:-100px auto 0;position:relative;box-shadow:0 12px 34px rgba(0,0,0,.22)}
+.nature .inner{max-width:740px;margin:0 auto;padding:44px 24px 96px}
+.nature h2{font-size:clamp(30px,4.5vw,46px)}
+.nature p{margin-top:20px;font-size:16px}
+.nature p+p{margin-top:16px}
+
+/* Amenities card overlap */
+.amenities-wrap{position:relative}
+.amenities-wrap>img{width:100%;height:min(62vh,580px);object-fit:cover}
+.amen-card{background:var(--forest);color:var(--cream);text-align:center;max-width:780px;margin:-170px auto 0;position:relative;border-radius:20px;padding:56px 50px;box-shadow:0 30px 70px rgba(0,0,0,.3);border:1px solid rgba(193,154,91,.35)}
+.amen-card img.mk{height:64px;width:auto;margin:0 auto 20px;opacity:.95}
+.amen-card h2{color:#fff;font-size:clamp(28px,4vw,42px);margin-bottom:18px}
+.amen-card p{opacity:.9;font-size:15.5px;margin-bottom:30px}
+.amen-card .row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.spacer{height:96px}
+
+/* Convenience */
+.conv-photo{width:100%;height:min(52vh,480px);object-fit:cover;object-position:center 22%}
+.conv{background:var(--paper);text-align:center;padding:84px 24px}
+.conv h2{font-size:clamp(30px,4.5vw,46px);margin-bottom:26px}
+.conv .narrow{max-width:700px;margin:0 auto}
+.conv p{font-size:16px;margin-bottom:18px}
+.tag{margin-top:26px}
+
+/* Location + amenities directory */
+.loc{text-align:center;padding:92px 24px 60px;position:relative;overflow:hidden}
+.loc h2{font-size:clamp(30px,4.5vw,46px);margin-bottom:24px}
+.loc .narrow{max-width:720px;margin:0 auto}
+.loc .narrow p{margin-bottom:20px;font-size:16px}
+.loc .loc-b{position:absolute;right:-10px;top:20px;width:210px;height:auto;opacity:.22;z-index:-1}
+.directory{background:var(--forest);color:var(--cream);padding:80px 24px}
+.directory .head{text-align:center;max-width:640px;margin:0 auto 50px}
+.directory .head .eyebrow{color:var(--gold-light)}
+.directory .head h2{color:#fff;font-size:clamp(28px,4vw,44px);margin-top:12px}
+.amenity-map{max-width:1000px;margin:0 auto 54px}
+.amenity-map img{width:100%;border-radius:16px;box-shadow:0 20px 55px rgba(0,0,0,.4);border:1px solid rgba(193,154,91,.3)}
+.dir-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;max-width:1080px;margin:0 auto}
+.dir-col h3{color:var(--gold-light);font-size:20px;margin-bottom:16px;font-style:italic;display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(193,154,91,.28)}
+.cat-ic{width:22px;height:22px;flex:0 0 22px;color:var(--gold)}
+.dir-col ul{list-style:none;display:grid;gap:9px}
+.dir-col li{font-size:13px;line-height:1.35;opacity:.85;padding-left:15px;position:relative}
+.dir-col li:before{content:"›";position:absolute;left:0;color:var(--gold)}
+@media(max-width:900px){.dir-grid{grid-template-columns:repeat(2,1fr);gap:30px}}
+@media(max-width:520px){.dir-grid{grid-template-columns:1fr}}
+
+/* Quiz */
+.quiz{background:var(--forest2);color:var(--cream);padding:92px 24px}
+.quiz .head{text-align:center;max-width:640px;margin:0 auto 44px}
+.quiz .head .eyebrow{color:var(--gold-light)}
+.quiz h2{color:#fff;font-size:clamp(28px,4vw,44px);margin-top:12px}
+.quiz .head p{opacity:.85;margin-top:8px}
+.quiz-card{max-width:680px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(193,154,91,.3);border-radius:18px;padding:42px}
+.q-progress{height:6px;background:rgba(255,255,255,.12);border-radius:4px;margin-bottom:32px;overflow:hidden}
+.q-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:.4s}
+.q-question{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:27px;color:#fff;margin-bottom:26px;text-align:center}
+.q-options{display:grid;gap:14px}
+.q-opt{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.16);color:var(--cream);padding:16px 22px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.03em;transition:.2s;text-align:left}
+.q-opt:hover{border-color:var(--gold-light);background:rgba(193,154,91,.2)}
+.q-result{text-align:center}
+.q-result h3{color:#fff;font-size:30px;font-style:italic;margin:8px 0 14px}
+.q-result p{margin-bottom:26px;opacity:.9}
+
+/* Sticky-reveal footer */
+.page{position:relative;z-index:2;background:var(--white)}
+.site-footer{position:fixed;left:0;bottom:0;width:100%;z-index:1}
+@media(max-width:860px){.site-footer{position:static}.page{margin-bottom:0!important}}
+
+/* Footer */
+.footer{background:var(--forest)}
+.siteplan-section{background:var(--forest);text-align:center;padding:70px 24px 60px}
+.siteplan-section .eyebrow{color:var(--gold-light)}
+.siteplan-section h2{color:#fff;font-size:clamp(28px,4vw,44px);margin:12px 0 30px}
+.siteplan-section img{max-width:1000px;width:100%;margin:0 auto;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.siteplan-section .sp-note{color:var(--sage-light);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:16px;opacity:.7}
+.footer-form-wrap{background:var(--forest2);padding:70px 24px}
+.footer-form{max-width:560px;margin:0 auto;text-align:center}
+.footer-form .eyebrow{color:var(--gold-light)}
+.footer-form h2{color:#fff;font-size:clamp(28px,4vw,42px);margin:12px 0 10px}
+.footer-form p{color:var(--cream);opacity:.8;margin-bottom:28px;font-size:14px}
+.ff-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.ff-grid .full{grid-column:1/-1}
+.footer-body{padding:64px 24px 44px;color:var(--cream)}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:start}
+.footer h3.book{color:var(--gold-light);font-size:30px;font-style:italic;margin-bottom:14px}
+.footer .book-sub{font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.7;line-height:2;color:var(--sage-light)}
+.footer .divider{height:1px;background:var(--gold);opacity:.5;margin:22px 0;max-width:300px}
+.footer .addr{font-weight:500;margin-bottom:4px}
+.footer .addr span,.footer .phone{color:var(--gold-light)}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:26px;text-align:right}
+.socials{display:flex;gap:12px}
+.socials a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(193,154,91,.4);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-weight:500;transition:.2s;font-size:13px}
+.socials a:hover{background:var(--gold);color:var(--forest)}
+.foot-lockup img{width:120px;opacity:.95}
+.footer-legal{border-top:1px solid rgba(255,255,255,.1);margin-top:44px;padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:11px;color:var(--sage-light)}
+.footer-legal a{margin-left:18px}
+.disclaimer{font-size:10.5px;color:var(--sage-light);opacity:.7;max-width:820px;margin-top:18px;line-height:1.6}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,37,30,.78);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:200;padding:24px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:480px;width:100%;padding:44px 40px;position:relative;animation:pop .3s ease;max-height:92vh;overflow-y:auto}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.modal .close{position:absolute;top:16px;right:20px;font-size:26px;line-height:1;background:none;border:none;cursor:pointer;color:#9aa5a0}
+.modal .close:hover{color:var(--forest)}
+.modal h3{font-size:30px;font-style:italic;margin-bottom:6px}
+.modal .msub{font-size:13px;color:#7b857b;margin-bottom:26px;font-family:'Jost',sans-serif}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--forest);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid #dfe1dc;border-radius:9px;font-family:'Jost',sans-serif;font-size:14px;color:var(--text);transition:.2s;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field .err{color:#b23b2e;font-size:11px;margin-top:4px;display:none}
+.field.invalid input,.field.invalid select{border-color:#b23b2e}
+.field.invalid .err{display:block}
+.modal .btn{width:100%;margin-top:8px}
+.info-list{list-style:none;display:grid;gap:12px}
+.info-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;font-family:'Jost',sans-serif}
+.info-list li span.b{color:var(--gold);font-weight:600}
+.form-success{text-align:center;padding:20px 0}
+.form-success .check{width:64px;height:64px;border-radius:50%;background:linear-gradient(90deg,var(--gold),var(--gold-light));color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 18px}
+.form-success h3{margin-bottom:8px}
+.form-success p{color:#7b857b;font-size:14px;font-family:'Jost',sans-serif}
+
+/* Toast */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--forest);color:var(--cream);padding:15px 28px;border-radius:40px;font-size:13px;letter-spacing:.06em;box-shadow:0 14px 40px rgba(0,0,0,.35);z-index:300;transition:.4s;opacity:0;border:1px solid rgba(193,154,91,.4)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+@media(max-width:860px){
+  .menu{position:fixed;top:0;right:0;height:100vh;width:280px;background:var(--forest2);flex-direction:column;align-items:flex-start;padding:90px 32px;gap:22px;transform:translateX(100%);transition:.35s;box-shadow:-10px 0 40px rgba(0,0,0,.35)}
+  .menu.open{transform:translateX(0)}
+  .burger{display:flex;z-index:80}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .drop-panel{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;background:transparent;padding:6px 0 0 14px;min-width:auto}
+  .drop-panel a{color:var(--gold-light);padding:8px 0}
+  .drop-panel a:hover{background:none}
+  .footer-grid{grid-template-columns:1fr;gap:36px}
+  .footer-right{align-items:flex-start;text-align:left}
+  .amen-card{padding:40px 26px;margin-top:-130px}
+  .topbar-info{display:none}
+  .ff-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="page" id="page">
+<!-- Top bar -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-info">A PRESTIGIOUS COLLECTION OF TOWNHOMES IN <strong>ORANGEVILLE</strong> &nbsp;·&nbsp; CALL <strong>416-710-6846</strong></div>
+    <div class="topbar-cta">
+      <button class="btn btn-outline" data-modal="register">Register</button>
+      <button class="btn btn-outline" data-modal="brochure">Brochure</button>
+      <button class="btn btn-outline" data-modal="tour">Book a Tour</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Broadway Glen home">
+      <img src="assets/monogram.png" alt="Broadway Glen monogram">
+      <span class="txt"><span class="name">BROADWAY GLEN</span><span class="sub">ORANGEVILLE</span></span>
+    </a>
+    <ul class="menu" id="menu">
+      <li class="drop"><a class="has-drop">The Community <span class="caret">▼</span></a>
+        <div class="drop-panel">
+          <a href="#collection">The Collection</a>
+          <a href="#collection">Floorplans</a>
+          <a href="#collection">Home Features</a>
+        </div>
+      </li>
+      <li><a href="#nature">Lifestyle</a></li>
+      <li class="drop"><a class="has-drop">Amenities <span class="caret">▼</span></a>
+        <div class="drop-panel">
+          <a href="#amenities">Culture &amp; Community</a>
+          <a href="#directory">Endless Amenities</a>
+          <a href="#convenience">Convenience</a>
+        </div>
+      </li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#quiz">Interactive Quiz</a></li>
+      <li><a href="#register" onclick="openModal('register');return false;">Register</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- Hero -->
+<header class="hero">
+  <img class="hero-bg" src="assets/townhomes.jpg" alt="Broadway Glen townhome rendering">
+  <div class="hero-overlay">
+    <img class="hero-logo" src="assets/logo-lockup.png" alt="Broadway Glen — Orangeville">
+    <button class="btn btn-gold" data-modal="register">Register for Priority Access</button>
+  </div>
+</header>
+<div class="statusbar">Now Previewing — Register Today for VIP Pricing &amp; Floorplans</div>
+
+<!-- Collection -->
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="eyebrow">A Prestigious Collection</div>
+    <h2 class="display">Freehold Townhomes</h2>
+    <p>A boutique collection of stylish, multi-level townhomes by Maramel Homes — open-concept layouts, modern kitchens with designer finishes, attached garages, and private outdoor spaces, all in the heart of Orangeville.</p>
+    <div class="row">
+      <button class="btn btn-gold" data-modal="floorplans">Floorplans</button>
+      <button class="btn btn-gold" data-modal="features">Home Features</button>
+    </div>
+  </div>
+</section>
+
+<!-- Nature -->
+<section class="nature" id="nature">
+  <img class="strip" src="assets/edited-aerial.jpg" alt="Aerial view of the Broadway Glen community">
+  <img class="circle-photo" src="assets/family-water.jpg" alt="Family by Island Lake">
+  <div class="inner">
+    <h2 class="display">Explore Life Surrounded By Natural Beauty</h2>
+    <p>Welcome to Broadway Glen, a community where small-town charm meets scenic beauty in the heart of Orangeville. You're surrounded by the natural wonders that make this area so special — from the tranquil waters of Island Lake to the breathtaking trails of Mono Cliffs Provincial Park.</p>
+    <p>Spend your mornings on the Vicki Barron Lakeside Trail, your afternoons exploring Rotary Park, or unwind with a peaceful walk through Kay Cee Gardens. Whether you're exploring forested trails or relaxing by the lake, Broadway Glen offers a lifestyle where nature is always at your doorstep.</p>
+  </div>
+</section>
+
+<!-- Amenities -->
+<section class="amenities-wrap" id="amenities">
+  <img src="assets/aerial.jpg" alt="Aerial view of Broadway Glen and Orangeville">
+  <div class="amen-card">
+    <img class="mk" src="assets/monogram.png" alt="Broadway Glen monogram">
+    <h2 class="display">Where Culture Meets Community</h2>
+    <p>In the heart of Orangeville, historic charm meets vibrant local culture. Stroll along Broadway and explore heritage buildings, boutique shops, cozy cafés, and chef-owned restaurants — all with small-town warmth and character. Enjoy live theatre at the Opera House, browse local art studios, or catch seasonal farmers' markets, live music, parades, and community events.</p>
+    <div class="row">
+      <button class="btn btn-gold" data-modal="downtown">Downtown Orangeville</button>
+      <button class="btn btn-gold" data-modal="nature">Trails &amp; Nature</button>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</section>
+
+<!-- Convenience -->
+<section id="convenience">
+  <img class="conv-photo" src="assets/downtown.jpg" alt="Historic downtown Broadway, Orangeville">
+  <div class="conv">
+    <h2 class="display">The Best of Both Worlds, Just Steps Away</h2>
+    <div class="narrow">
+      <p>Broadway Glen brings you closer to everything that makes Orangeville special. Just minutes from your door, explore vibrant downtown streets filled with local shops, dining, and culture. When you're ready to recharge, nature awaits — with scenic trails, green space, and peaceful surroundings all around you.</p>
+      <p>This thoughtfully planned community blends modern townhome living with the beauty of the outdoors, offering a lifestyle that's active, balanced, and easy to love. Whether it's a morning coffee run or an evening walk in the woods, Broadway Glen puts it all within reach.</p>
+    </div>
+    <div class="tag"><button class="btn btn-forest" data-modal="belmont">Discover Orangeville</button></div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="loc" id="location">
+  <img class="loc-b" src="assets/b-sage.png" alt="">
+  <div class="eyebrow">Location</div>
+  <h2 class="display" style="margin-top:12px">Broadway at Dawson Road</h2>
+  <div class="narrow">
+    <p>Set within a serene, tree-lined enclave near the intersection of Broadway and Dawson Road, Broadway Glen backs onto a scenic natural channel with direct access to the Dufferin County CP Rail Trail and its own private park.</p>
+    <p>Broadway Glen offers strong connectivity for commuters — with quick access to Highway 10, County Road 109, Highway 9, and routes toward Brampton, Caledon and the GTA. A practical balance between small-town living and regional accessibility, ideal for professionals and hybrid workers alike.</p>
+  </div>
+  <div style="margin-top:30px"><button class="btn btn-sage" data-modal="commute">Commuting &amp; Access</button></div>
+</section>
+
+<!-- Directory -->
+<section class="directory" id="directory">
+  <div class="head">
+    <div class="eyebrow">Endless Amenities</div>
+    <h2 class="display">Everything Orangeville, Nearby</h2>
+  </div>
+  <div class="amenity-map"><img src="assets/amenity-map.jpg" alt="Map of amenities around Broadway Glen in Orangeville"></div>
+  <div class="dir-grid">
+    <div class="dir-col">
+      <h3><svg viewBox="0 0 24 24" class="cat-ic"><path d="M6 2v8a2 2 0 002 2v10M6 6M9 2v4a2 2 0 01-2 2M18 2c-1.5 0-2.5 2-2.5 5s1 4 2.5 4v11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Dining</h3>
+      <ul>
+        <li>Barley Vine Rail Co.</li><li>Forage Restaurant</li><li>Pia's On Broadway</li>
+        <li>Rustik Local Bistro</li><li>The Black Wolf Smokehouse</li><li>Son Of A Chef Bakery</li>
+        <li>Mochaberry Coffee &amp; Co.</li><li>Trattoria Semplice</li>
+      </ul>
+    </div>
+    <div class="dir-col">
+      <h3><svg viewBox="0 0 24 24" class="cat-ic"><path d="M12 22V12M12 12L7 8M12 15l4-3M12 3a4 4 0 014 4 4 4 0 01-1 8 5 5 0 01-6 0 4 4 0 01-1-8 4 4 0 014-4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Parks &amp; Rec</h3>
+      <ul>
+        <li>Mono Cliffs Provincial Park</li><li>Island Lake Conservation Area</li><li>Kay Cee Gardens</li>
+        <li>Monora Park</li><li>Alder Street Rec Centre</li><li>Tony Rose Sports Centre</li><li>Orangetheory Fitness</li>
+      </ul>
+    </div>
+    <div class="dir-col">
+      <h3><svg viewBox="0 0 24 24" class="cat-ic"><path d="M6 7h12l1 13H5L6 7zM9 7a3 3 0 016 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Shopping</h3>
+      <ul>
+        <li>Orangeville Shopping Centre</li><li>Zehrs Orangeville</li><li>Sobeys &amp; FreshCo</li>
+        <li>Walmart Supercentre</li><li>The Home Depot</li><li>Winners</li><li>LCBO &amp; Beer Store</li>
+      </ul>
+    </div>
+    <div class="dir-col">
+      <h3><svg viewBox="0 0 24 24" class="cat-ic"><path d="M3 8a2 2 0 002-2h14a2 2 0 002 2v3a2 2 0 000 2v3a2 2 0 00-2 2H5a2 2 0 00-2-2v-3a2 2 0 000-2V8zM10 8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 3"/></svg>Entertainment</h3>
+      <ul>
+        <li>Orangeville Opera House</li><li>Theatre Orangeville</li><li>Galaxy Cinemas</li>
+        <li>Alton Mill Arts Centre</li><li>Adamo Estate Winery</li><li>Millcroft Inn &amp; Spa</li>
+      </ul>
+    </div>
+    <div class="dir-col">
+      <h3><svg viewBox="0 0 24 24" class="cat-ic"><path d="M12 4L2 9l10 5 10-5-10-5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Education</h3>
+      <ul>
+        <li>Credit Meadows Elementary</li><li>Orangeville District Secondary</li><li>Robert F. Hall Catholic Secondary</li>
+        <li>St. Andrew Catholic Elementary</li><li>St. Benedict Catholic Elementary</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Quiz -->
+<section class="quiz" id="quiz">
+  <div class="head">
+    <div class="eyebrow">Interactive Quiz</div>
+    <h2 class="display">Find Your Perfect Townhome</h2>
+    <p>Answer a few quick questions and we'll match you with the Broadway Glen home that fits your lifestyle.</p>
+  </div>
+  <div class="quiz-card">
+    <div class="q-progress"><span id="qbar"></span></div>
+    <div id="qbody"></div>
+  </div>
+</section>
+
+<!-- Site plan & register (scrolling content) -->
+<div class="footer">
+  <div class="siteplan-section" id="siteplan">
+    <div class="eyebrow">Site Plan</div>
+    <h2 class="display">Explore the Community</h2>
+    <img src="assets/siteplan.jpg" alt="Broadway Glen site plan — 57 townhomes across 8 buildings">
+    <p class="sp-note">Map is not to scale. Artist's concept.</p>
+  </div>
+
+  <!-- Register form -->
+  <div class="footer-form-wrap" id="register">
+    <div class="footer-form">
+      <div class="eyebrow">Register Now</div>
+      <h2 class="display">Be First in Line at Broadway Glen</h2>
+      <p>Get priority access to floorplans, pricing, and VIP incentives before the public.</p>
+      <form class="cform" id="regForm" novalidate>
+        <div class="ff-grid">
+          <div class="field"><input name="name" type="text" placeholder="Full Name"><div class="err">Please enter your name.</div></div>
+          <div class="field"><input name="phone" type="tel" placeholder="Phone"><div class="err">Please enter your phone.</div></div>
+          <div class="field full"><input name="email" type="email" placeholder="Email Address"><div class="err">Please enter a valid email.</div></div>
+          <div class="field full"><select name="realtor"><option value="">Are you a realtor?</option><option>No</option><option>Yes</option><option>No, but I am under contract</option></select><div class="err">Please select an option.</div></div>
+        </div>
+        <button class="btn btn-gold" type="submit" style="width:100%;margin-top:8px">Submit Registration</button>
+      </form>
+    </div>
+  </div>
+</div><!-- /.footer content -->
+</div><!-- /.page -->
+
+<!-- True footer (sticky reveal) -->
+<footer class="footer site-footer">
+  <div class="footer-body wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-lockup.png" alt="Broadway Glen" style="width:96px;margin-bottom:20px">
+        <h3 class="book">Book a Tour</h3>
+        <div class="book-sub">Your opportunity to own in one of<br>Orangeville's most connected communities</div>
+        <div class="divider"></div>
+        <div class="addr">Broadway at Dawson Road, Orangeville, ON</div>
+        <div>Contact <span class="phone">416-710-6846</span> for inquiries.</div>
+        <div class="divider"></div>
+        <button class="btn btn-gold" data-modal="tour" style="margin-top:4px">Book a Tour</button>
+      </div>
+      <div class="footer-right">
+        <div class="socials">
+          <a href="https://www.instagram.com/maramel_homes/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://www.facebook.com/maramelhomes/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        </div>
+        <div class="foot-lockup"><img src="assets/maramel-logo.png" alt="Maramel Homes"></div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© 2026 Broadway Glen · Maramel Homes</span>
+      <span><a href="#" onclick="return false">Privacy Policy</a><a href="#" onclick="return false">Legal Disclaimer</a></span>
+    </div>
+    <p class="disclaimer">This website and commentary herein are provided solely to share information with the public. All content is conceptual and for informational purposes only. Prices, renderings, specifications, and materials are subject to change without notice. Illustrations are artist's concept. E. &amp; O.E.</p>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="close" id="modalClose" aria-label="Close">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Mobile nav ---------- */
+const burger=document.getElementById('burger'), menu=document.getElementById('menu');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');menu.classList.toggle('open')});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  if(!a.classList.contains('has-drop')){burger.classList.remove('open');menu.classList.remove('open')}
+}));
+
+/* ---------- Toast ---------- */
+const toast=document.getElementById('toast');
+function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove('show'),3200)}
+
+/* ---------- Modal templates ---------- */
+const contactForm=(title,sub,extra='')=>`
+  <h3 class="display">${title}</h3>
+  <p class="msub">${sub}</p>
+  <form class="cform" novalidate>
+    <div class="field"><label>Full Name</label><input name="name" type="text" placeholder="Jane Doe"><div class="err">Please enter your name.</div></div>
+    <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@email.com"><div class="err">Please enter a valid email.</div></div>
+    <div class="field"><label>Phone</label><input name="phone" type="tel" placeholder="416-000-0000"><div class="err">Please enter your phone number.</div></div>
+    ${extra}
+    <button class="btn btn-gold" type="submit">Submit</button>
+  </form>`;
+
+const infoPanel=(title,sub,items)=>`
+  <h3 class="display">${title}</h3>
+  <p class="msub">${sub}</p>
+  <ul class="info-list">
+    ${items.map(i=>`<li><span class="b">◆</span><span>${i}</span></li>`).join('')}
+  </ul>
+  <button class="btn btn-gold" data-modal="register" style="margin-top:26px;width:100%">Register for Details</button>`;
+
+const homeSelect=`<div class="field"><label>Home Type of Interest</label><select name="home"><option value="">Select…</option><option>2-Bedroom Town</option><option>3-Bedroom Town</option><option>End Unit</option><option>Not sure yet</option></select><div class="err">Please choose a home type.</div></div>`;
+const tourFields=`<div class="field"><label>Preferred Date</label><input name="date" type="date"><div class="err">Please choose a date.</div></div>
+  <div class="field"><label>Message (optional)</label><textarea name="msg" rows="2" placeholder="Anything we should know?"></textarea></div>`;
+
+const MODALS={
+  register:()=>contactForm('Register Your Interest','Be the first to receive availability, pricing and VIP incentives.',homeSelect),
+  brochure:()=>contactForm('Request the Brochure','We\'ll email you the Broadway Glen brochure and floorplans.',''),
+  tour:()=>contactForm('Book a Tour','Visit us — Broadway at Dawson Road, Orangeville, ON.',tourFields),
+  floorplans:()=>infoPanel('Floorplans','A boutique collection of multi-level freehold townhomes.',
+    ['2-Bedroom Towns — efficient open-concept living','3-Bedroom Towns — room for a growing family','End Units — extra light and outdoor space','Multi-level layouts with attached garages','Detailed floorplans &amp; sizing released to registrants']),
+  features:()=>infoPanel('Home Features','Finished to a refined, modern standard.',
+    ['Open-concept kitchens with designer finishes','Spacious multi-level layouts','Attached garages','Private outdoor spaces','Premium modern exterior architecture','Low-maintenance living']),
+  downtown:()=>infoPanel('Downtown Orangeville','Historic Broadway, steps from your door.',
+    ['Boutique shops &amp; heritage buildings','Cozy cafés &amp; chef-owned restaurants','Orangeville Farmers\' Market','Live theatre at the Opera House','Seasonal events, parades &amp; live music']),
+  nature:()=>infoPanel('Trails &amp; Nature','Nature is always at your doorstep.',
+    ['Dufferin County CP Rail Trail access','Island Lake Conservation Area','Mono Cliffs Provincial Park','Vicki Barron Lakeside Trail','Kay Cee Gardens &amp; Rotary Park','Broadway Glen\'s own private park']),
+  belmont:()=>infoPanel('Discover Orangeville','Small-town charm in Dufferin County.',
+    ['One of Ontario\'s most walkable towns','Vibrant, historic downtown Broadway','Strong family &amp; community atmosphere','Recreation centres &amp; healthcare nearby','Excellent schools &amp; childcare']),
+  commute:()=>infoPanel('Commuting &amp; Access','Balanced small-town living with regional reach.',
+    ['Highway 10 &amp; County Road 109','Highway 9','Brampton commuter routes','Caledon access corridors','Local Orangeville transit','Easy routes toward the GTA']),
+};
+
+/* ---------- Modal open / close ---------- */
+const overlay=document.getElementById('overlay'), modalContent=document.getElementById('modalContent');
+function openModal(key){
+  const fn=MODALS[key]; if(!fn)return;
+  modalContent.innerHTML=fn();
+  overlay.classList.add('open');
+  bindForm(modalContent.querySelector('.cform'));
+  bindModalTriggers(modalContent);
+}
+function closeModal(){overlay.classList.remove('open')}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function bindModalTriggers(scope){
+  scope.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.modal)));
+}
+bindModalTriggers(document);
+
+/* ---------- Form validation ---------- */
+function bindForm(form){
+  if(!form)return;
+  const inModal=form.closest('.modal');
+  form.addEventListener('submit',e=>{
+    e.preventDefault(); let ok=true;
+    form.querySelectorAll('.field').forEach(f=>{
+      const inp=f.querySelector('input,select'); if(!inp||inp.tagName==='TEXTAREA')return;
+      let bad=false;
+      if(inp.name==='email'){bad=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())}
+      else if(inp.type==='date'||inp.tagName==='SELECT'){bad=!inp.value}
+      else{bad=inp.value.trim().length<2}
+      f.classList.toggle('invalid',bad); if(bad)ok=false;
+    });
+    if(!ok)return;
+    if(inModal){
+      modalContent.innerHTML=`<div class="form-success"><div class="check">✓</div><h3 class="display">Thank you!</h3><p>Our Broadway Glen sales team will be in touch within one business day.</p></div><button class="btn btn-gold" style="width:100%;margin-top:24px" id="doneBtn">Close</button>`;
+      document.getElementById('doneBtn').addEventListener('click',closeModal);
+    }else{
+      form.innerHTML=`<div class="form-success" style="color:var(--cream)"><div class="check">✓</div><h3 class="display" style="color:#fff">You're registered!</h3><p style="color:var(--cream)">Our team will reach out with priority access details soon.</p></div>`;
+    }
+    showToast('Request received — we\'ll be in touch soon.');
+  });
+  form.querySelectorAll('input,select').forEach(inp=>inp.addEventListener('input',()=>inp.closest('.field').classList.remove('invalid')));
+}
+bindForm(document.getElementById('regForm'));
+
+/* ---------- Interactive Quiz ---------- */
+const QUIZ=[
+  {q:'How much space are you looking for?',a:[['Just right for me','2'],['Room for the family','3'],['Maximum space &amp; light','end'],['Not sure yet','2']]},
+  {q:'What matters most day-to-day?',a:[['Low-maintenance living','simple'],['Entertaining friends','space'],['Being close to nature','nature'],['A short commute','commute']]},
+  {q:'Who\'s moving in?',a:[['Just me','solo'],['Me and a partner','couple'],['A growing family','family'],['Downsizing','down']]},
+];
+const RESULTS={
+  '2':{t:'The 2-Bedroom Town',d:'An efficient open-concept townhome — perfectly sized for singles, couples, or downsizers who want comfort without excess.'},
+  '3':{t:'The 3-Bedroom Town',d:'A spacious multi-level layout with room for the whole family, an attached garage, and private outdoor space.'},
+  'end':{t:'The End-Unit Town',d:'Our brightest layout — extra windows, added light, and more outdoor space on a premium corner position.'},
+};
+let qi=0, pick='2';
+const qbody=document.getElementById('qbody'), qbar=document.getElementById('qbar');
+function renderQuiz(){
+  qbar.style.width=(qi/QUIZ.length*100)+'%';
+  const step=QUIZ[qi];
+  qbody.innerHTML=`<div class="q-question">${step.q}</div><div class="q-options">${step.a.map(o=>`<button class="q-opt" data-v="${o[1]}">${o[0]}</button>`).join('')}</div>`;
+  qbody.querySelectorAll('.q-opt').forEach(b=>b.addEventListener('click',()=>{
+    if(qi===0)pick=b.dataset.v;
+    qi++;
+    if(qi>=QUIZ.length)renderResult(); else renderQuiz();
+  }));
+}
+function renderResult(){
+  qbar.style.width='100%';
+  const r=RESULTS[pick]||RESULTS['2'];
+  qbody.innerHTML=`<div class="q-result"><div class="eyebrow" style="color:#d6b57e">Your match</div><h3 class="display">${r.t}</h3><p>${r.d}</p><button class="btn btn-gold" id="qBook">Register for This Plan</button> <button class="btn" id="qRetry" style="background:transparent;border:1.5px solid rgba(255,255,255,.4);color:#fff">Retake</button></div>`;
+  document.getElementById('qBook').addEventListener('click',()=>openModal('register'));
+  document.getElementById('qRetry').addEventListener('click',()=>{qi=0;renderQuiz()});
+}
+renderQuiz();
+
+/* ---------- Hero parallax ---------- */
+const heroBg=document.querySelector('.hero .hero-bg');
+/* ---------- Sticky footer reveal ---------- */
+const pageEl=document.getElementById('page'), siteFooter=document.querySelector('.site-footer');
+function sizeFooterReveal(){
+  if(window.innerWidth<=860){pageEl.style.marginBottom='0';return;}
+  pageEl.style.marginBottom=siteFooter.offsetHeight+'px';
+}
+function onScroll(){
+  if(heroBg){
+    const y=window.scrollY;
+    if(y<900) heroBg.style.transform='translateY('+(y*0.18)+'px)';
+  }
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',sizeFooterReveal);
+window.addEventListener('load',sizeFooterReveal);
+sizeFooterReveal();
+</script>
+</body>
+</html>
