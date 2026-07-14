@@ -303,10 +303,9 @@ a{text-decoration:none;color:inherit}
 <!-- Hero -->
 <header class="hero">
   <div class="hero-slider" id="heroSlider">
-    <div class="slide is-active"><img src="assets/slider/slide1.jpg" alt="Broadway Glen townhomes"></div>
-    <div class="slide"><img src="assets/slider/slide2.jpg" alt="Broadway Glen townhome streetscape"></div>
-    <div class="slide"><img src="assets/slider/slide3.jpg" alt="Aerial view of Broadway Glen"></div>
-    <div class="slide slide-video"><video src="assets/slider/hero-video.mp4" muted loop playsinline preload="metadata" poster="assets/slider/video-poster.jpg"></video></div>
+    <div class="slide slide-video is-active"><video src="assets/slider/slide1.mp4" muted playsinline preload="auto" poster="assets/slider/slide1-poster.jpg"></video></div>
+    <div class="slide slide-video"><video src="assets/slider/slide2.mp4" muted playsinline preload="metadata" poster="assets/slider/slide2-poster.jpg"></video></div>
+    <div class="slide slide-video"><video src="assets/slider/hero-video.mp4" muted playsinline preload="metadata" poster="assets/slider/hero-video-poster.jpg"></video></div>
   </div>
   <div class="hero-overlay">
     <img class="hero-logo" src="assets/logo-lockup.png" alt="Broadway Glen — Orangeville">
@@ -656,19 +655,21 @@ renderQuiz();
     dotsWrap.appendChild(d);
   });
   const dots=[...dotsWrap.children];
+  const vids=slides.map(s=>s.querySelector('video'));
   function go(i){
     const prev=cur; cur=(i+slides.length)%slides.length;
     slides[prev].classList.remove('is-active'); dots[prev].classList.remove('on');
     slides[cur].classList.add('is-active'); dots[cur].classList.add('on');
-    slides.forEach(s=>{const v=s.querySelector('video'); if(v){v.pause();}});
-    const vid=slides[cur].querySelector('video');
-    if(vid){try{vid.currentTime=0;vid.play().catch(()=>{});}catch(e){}}
+    vids.forEach((v,k)=>{if(v&&k!==cur){v.pause();}});
+    const vid=vids[cur];
+    if(vid){try{vid.currentTime=0;const p=vid.play();if(p)p.catch(()=>{});}catch(e){}}
     schedule();
   }
-  function schedule(){clearTimeout(timer);const dur=slides[cur].querySelector('video')?11000:5000;timer=setTimeout(()=>go(cur+1),dur);}
+  function schedule(){clearTimeout(timer);timer=setTimeout(()=>go(cur+1),16000);} /* safety fallback */
+  vids.forEach(v=>{if(v)v.addEventListener('ended',()=>go(cur+1));});
   document.getElementById('heroNext').addEventListener('click',()=>go(cur+1));
   document.getElementById('heroPrev').addEventListener('click',()=>go(cur-1));
-  schedule();
+  go(0);
 })();
 /* ---------- Sticky footer reveal ---------- */
 const pageEl=document.getElementById('page'), siteFooter=document.querySelector('.site-footer');
