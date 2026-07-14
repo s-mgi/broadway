@@ -90,10 +90,23 @@ a{text-decoration:none;color:inherit}
 .burger span{width:26px;height:2px;background:var(--cream);transition:.3s}
 
 /* Hero */
-.hero{position:relative;background:var(--forest);height:min(74vh,600px);overflow:hidden}
-.hero .hero-bg{position:absolute;top:-20%;left:0;width:100%;height:140%;object-fit:cover;object-position:center 42%;display:block;will-change:transform}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,37,30,.4),rgba(14,37,30,.2) 45%,rgba(14,37,30,.55));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px}
+.hero{position:relative;background:var(--forest);height:min(78vh,640px);overflow:hidden}
+.hero-slider{position:absolute;inset:0}
+.hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease;will-change:opacity}
+.hero .slide.is-active{opacity:1}
+.hero .slide img,.hero .slide video{width:100%;height:100%;object-fit:cover;object-position:center 48%;display:block}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(14,37,30,.35);border:1px solid rgba(255,255,255,.5);color:#fff;width:48px;height:48px;border-radius:50%;font-size:26px;line-height:1;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:center}
+.hero-arrow:hover{background:var(--gold);border-color:var(--gold)}
+.hero-arrow.prev{left:22px}
+.hero-arrow.next{right:22px}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:10px}
+.hero-dot{width:11px;height:11px;border-radius:50%;border:1.5px solid #fff;background:transparent;cursor:pointer;transition:.25s;padding:0}
+.hero-dot.on{background:var(--gold-light);border-color:var(--gold-light);transform:scale(1.15)}
+@media(max-width:600px){.hero-arrow{width:40px;height:40px;font-size:22px}.hero-arrow.prev{left:10px}.hero-arrow.next{right:10px}}
+.hero-overlay{position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(180deg,rgba(14,37,30,.4),rgba(14,37,30,.2) 45%,rgba(14,37,30,.55));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px}
+.hero-eyebrow{color:var(--gold-light);margin-bottom:20px;text-shadow:0 2px 14px rgba(0,0,0,.5);font-size:13px;letter-spacing:.28em}
 .hero-logo{width:clamp(110px,13vw,170px);height:auto;margin-bottom:30px;filter:drop-shadow(0 6px 26px rgba(0,0,0,.45))}
+.hero-overlay .btn{pointer-events:auto}
 .hero-overlay .btn{margin-top:0}
 .statusbar{background:linear-gradient(90deg,var(--gold),var(--gold-light));text-align:center;color:var(--forest);font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;padding:15px}
 
@@ -255,18 +268,6 @@ a{text-decoration:none;color:inherit}
 <body>
 
 <div class="page" id="page">
-<!-- Top bar -->
-<div class="topbar">
-  <div class="wrap">
-    <div class="topbar-info">A PRESTIGIOUS COLLECTION OF TOWNHOMES IN <strong>ORANGEVILLE</strong> &nbsp;·&nbsp; CALL <strong>416-710-6846</strong></div>
-    <div class="topbar-cta">
-      <button class="btn btn-outline" data-modal="register">Register</button>
-      <a class="btn btn-outline" href="assets/broadway-glen-brochure.pdf" target="_blank" rel="noopener">Brochure</a>
-      <button class="btn btn-outline" data-modal="tour">Book a Tour</button>
-    </div>
-  </div>
-</div>
-
 <!-- Nav -->
 <nav class="nav">
   <div class="wrap">
@@ -278,7 +279,6 @@ a{text-decoration:none;color:inherit}
       <li class="drop"><a class="has-drop">The Community <span class="caret">▼</span></a>
         <div class="drop-panel">
           <a href="#collection">The Collection</a>
-          <a href="#collection">Floorplans</a>
           <a href="#collection">Home Features</a>
         </div>
       </li>
@@ -302,11 +302,20 @@ a{text-decoration:none;color:inherit}
 
 <!-- Hero -->
 <header class="hero">
-  <img class="hero-bg" src="assets/townhomes.jpg" alt="Broadway Glen townhome rendering">
+  <div class="hero-slider" id="heroSlider">
+    <div class="slide is-active"><img src="assets/slider/slide1.jpg" alt="Broadway Glen townhomes"></div>
+    <div class="slide"><img src="assets/slider/slide2.jpg" alt="Broadway Glen townhome streetscape"></div>
+    <div class="slide"><img src="assets/slider/slide3.jpg" alt="Aerial view of Broadway Glen"></div>
+    <div class="slide slide-video"><video src="assets/slider/hero-video.mp4" muted loop playsinline preload="metadata" poster="assets/slider/video-poster.jpg"></video></div>
+  </div>
   <div class="hero-overlay">
     <img class="hero-logo" src="assets/logo-lockup.png" alt="Broadway Glen — Orangeville">
+    <div class="eyebrow hero-eyebrow">A Prestigious Collection of Townhomes in Orangeville</div>
     <button class="btn btn-gold" data-modal="register">Register for Priority Access</button>
   </div>
+  <button class="hero-arrow prev" id="heroPrev" aria-label="Previous slide">&#8249;</button>
+  <button class="hero-arrow next" id="heroNext" aria-label="Next slide">&#8250;</button>
+  <div class="hero-dots" id="heroDots"></div>
 </header>
 <div class="statusbar">Now Previewing — Register Today for VIP Pricing &amp; Floorplans</div>
 
@@ -317,7 +326,6 @@ a{text-decoration:none;color:inherit}
     <h2 class="display">Freehold Townhomes</h2>
     <p>A boutique collection of stylish, multi-level townhomes by Maramel Homes — open-concept layouts, modern kitchens with designer finishes, attached garages, and private outdoor spaces, all in the heart of Orangeville.</p>
     <div class="row">
-      <button class="btn btn-gold" data-modal="floorplans">Floorplans</button>
       <button class="btn btn-gold" data-modal="features">Home Features</button>
     </div>
   </div>
@@ -469,13 +477,13 @@ a{text-decoration:none;color:inherit}
     <div class="footer-grid">
       <div>
         <img src="assets/logo-lockup.png" alt="Broadway Glen" style="width:96px;margin-bottom:20px">
-        <h3 class="book">Book a Tour</h3>
+        <h3 class="book">Get in Touch</h3>
         <div class="book-sub">Your opportunity to own in one of<br>Orangeville's most connected communities</div>
         <div class="divider"></div>
         <div class="addr">Broadway at Dawson Road, Orangeville, ON</div>
         <div>Contact <span class="phone">416-710-6846</span> for inquiries.</div>
         <div class="divider"></div>
-        <button class="btn btn-gold" data-modal="tour" style="margin-top:4px">Book a Tour</button>
+        <button class="btn btn-gold" data-modal="register" style="margin-top:4px">Register Now</button>
       </div>
       <div class="footer-right">
         <div class="socials">
@@ -634,21 +642,40 @@ function renderResult(){
 }
 renderQuiz();
 
-/* ---------- Hero parallax ---------- */
-const heroBg=document.querySelector('.hero .hero-bg');
+/* ---------- Hero slider ---------- */
+(function(){
+  const slides=[...document.querySelectorAll('.hero .slide')];
+  if(!slides.length)return;
+  const dotsWrap=document.getElementById('heroDots');
+  let cur=0,timer;
+  slides.forEach((s,i)=>{
+    const d=document.createElement('button');
+    d.className='hero-dot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.addEventListener('click',()=>go(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots=[...dotsWrap.children];
+  function go(i){
+    const prev=cur; cur=(i+slides.length)%slides.length;
+    slides[prev].classList.remove('is-active'); dots[prev].classList.remove('on');
+    slides[cur].classList.add('is-active'); dots[cur].classList.add('on');
+    slides.forEach(s=>{const v=s.querySelector('video'); if(v){v.pause();}});
+    const vid=slides[cur].querySelector('video');
+    if(vid){try{vid.currentTime=0;vid.play().catch(()=>{});}catch(e){}}
+    schedule();
+  }
+  function schedule(){clearTimeout(timer);const dur=slides[cur].querySelector('video')?11000:5000;timer=setTimeout(()=>go(cur+1),dur);}
+  document.getElementById('heroNext').addEventListener('click',()=>go(cur+1));
+  document.getElementById('heroPrev').addEventListener('click',()=>go(cur-1));
+  schedule();
+})();
 /* ---------- Sticky footer reveal ---------- */
 const pageEl=document.getElementById('page'), siteFooter=document.querySelector('.site-footer');
 function sizeFooterReveal(){
   if(window.innerWidth<=860){pageEl.style.marginBottom='0';return;}
   pageEl.style.marginBottom=siteFooter.offsetHeight+'px';
 }
-function onScroll(){
-  if(heroBg){
-    const y=window.scrollY;
-    if(y<900) heroBg.style.transform='translateY('+(y*0.18)+'px)';
-  }
-}
-window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',sizeFooterReveal);
 window.addEventListener('load',sizeFooterReveal);
 sizeFooterReveal();
