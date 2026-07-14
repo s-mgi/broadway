@@ -43,6 +43,24 @@ a{text-decoration:none;color:inherit}
 .btn-forest{background:var(--forest);color:#fff}
 .btn-forest:hover{background:var(--forest2)}
 
+/* Scroll-reveal animations */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-zoom{opacity:0;transform:scale(.94);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal-zoom.in{opacity:1;transform:none}
+.circle-photo{animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.amen-card .mk{animation:floaty 5s ease-in-out infinite}
+.dir-col{transition:transform .3s ease}
+.dir-col:hover{transform:translateY(-5px)}
+.menu li>a{position:relative}
+.menu li>a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--gold-light);transition:width .3s ease}
+.menu li>a:hover::after{width:100%}
+.btn-gold{position:relative;overflow:hidden}
+.btn-gold::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .6s ease}
+.btn-gold:hover::after{left:140%}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal-zoom{opacity:1;transform:none;transition:none}.circle-photo,.amen-card .mk{animation:none}}
+
 /* Top bar */
 .topbar{background:var(--forest2);color:var(--cream)}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 24px;flex-wrap:wrap}
@@ -243,7 +261,7 @@ a{text-decoration:none;color:inherit}
     <div class="topbar-info">A PRESTIGIOUS COLLECTION OF TOWNHOMES IN <strong>ORANGEVILLE</strong> &nbsp;·&nbsp; CALL <strong>416-710-6846</strong></div>
     <div class="topbar-cta">
       <button class="btn btn-outline" data-modal="register">Register</button>
-      <button class="btn btn-outline" data-modal="brochure">Brochure</button>
+      <a class="btn btn-outline" href="assets/broadway-glen-brochure.pdf" target="_blank" rel="noopener">Brochure</a>
       <button class="btn btn-outline" data-modal="tour">Book a Tour</button>
     </div>
   </div>
@@ -634,6 +652,29 @@ window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',sizeFooterReveal);
 window.addEventListener('load',sizeFooterReveal);
 sizeFooterReveal();
+
+/* ---------- Scroll reveal ---------- */
+const revealSel='.collection .eyebrow,.collection h2,.collection p,.collection .row,'+
+  '.nature h2,.nature p,.amen-card,'+
+  '.conv h2,.conv .narrow p,.tag,'+
+  '.loc .eyebrow,.loc h2,.loc .narrow p,.loc>div:last-of-type,'+
+  '.directory .head,.dir-col,'+
+  '.siteplan-section .eyebrow,.siteplan-section h2,.siteplan-section .sp-note,'+
+  '.quiz .head,.quiz-card,'+
+  '.footer-form>*';
+document.querySelectorAll(revealSel).forEach(el=>el.classList.add('reveal'));
+document.querySelectorAll('.amenity-map,.conv-photo,.strip,.siteplan-section img,.circle-photo').forEach(el=>el.classList.add('reveal-zoom'));
+/* stagger grouped items */
+document.querySelectorAll('.dir-grid').forEach(g=>{
+  [...g.querySelectorAll('.dir-col')].forEach((c,i)=>c.style.transitionDelay=(i*90)+'ms');
+});
+document.querySelectorAll('.row,.ff-grid').forEach(g=>{
+  [...g.children].forEach((c,i)=>{if(c.classList.contains('reveal'))c.style.transitionDelay=(i*90)+'ms';});
+});
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.14,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal,.reveal-zoom').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
